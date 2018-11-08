@@ -1,0 +1,18 @@
+services:
+    demo_boston.event_listener.frontend_product_datagrid:
+        class: 'Demo\Bundle\BostonBundle\EventListener\FrontendProductDatagridListener'
+        arguments:
+        - "@oro_entity.doctrine_helper"
+        tags:
+        - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.pre.frontend-product-search-grid, method: onPreBuild }
+        - { name: kernel.event_listener, event: oro_datagrid.search_datasource.result.after.frontend-product-search-grid, method: onResultAfter }
+
+    demo_boston.service.shopping_list_to_order_converter:
+        class: 'Demo\Bundle\BostonBundle\Converter\ShoppingListToOrderConverter'
+        public: true
+        arguments:
+        - '@oro_order.handler.order_currency_handler'
+        - '@oro_order.handler.order_totals_handler'
+        - '@doctrine'
+        - '@oro_pricing.provider.frontend_product_prices'
+        - "@oro_entity.doctrine_helper"

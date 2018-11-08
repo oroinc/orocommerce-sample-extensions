@@ -1,0 +1,6 @@
+demo_boston:
+    resource:     "@DemoBostonBundle/Controller/CheckoutController.php"
+    type:         annotation
+    prefix:       /customer/demo
+    options:
+        frontend: true
