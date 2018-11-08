@@ -1,0 +1,9 @@
+layout:
+    actions:
+        - '@setBlockTheme':
+            themes: 'extra_attributes.html.twig'
+        - '@add':
+            id: product_datagrid_row__product_extra_attributes
+            parentId: product_datagrid_row_product_specification
+            blockType: container
+            prepend: false

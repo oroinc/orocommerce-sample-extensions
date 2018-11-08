@@ -1,0 +1,23 @@
+operations:
+
+    demo_boston_shopping_list_checkout:
+        label: 'Checkout '
+        applications: [commerce]
+        routes:
+            - oro_shopping_list_frontend_view
+        order: 220
+        button_options:
+            icon: fa-briefcase
+        preconditions:
+            '@and':
+                - '@has_elements': $lineItems
+        actions:
+            - '@redirect':
+                parameters:
+                    route: demo_boston_checkout
+                    route_parameters:
+                        id: $id
+
+    oro_shoppinglist_frontend_request_quote:
+        enabled: false
+
