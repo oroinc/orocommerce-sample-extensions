@@ -1,0 +1,81 @@
+services:
+    demo_pricing.prices.cache:
+        parent: oro.cache.abstract
+        calls:
+            - [ setNamespace, [ 'demo_pricing_prices' ] ]
+
+    demo_pricing.pricing_feature_voter:
+        class: 'Demo\Bundle\PricingBundle\Feature\PricingVoter'
+        tags:
+            - { name: oro_featuretogle.voter }
+
+    demo_pricing.cache.price:
+        class: Demo\Bundle\PricingBundle\Cache\PriceCache
+        arguments:
+            - '@demo_pricing.prices.cache'
+
+    # Price storage
+    demo_pricing.storage.prices_local:
+        class: Demo\Bundle\PricingBundle\Storage\CachePriceStorage
+        arguments:
+            - '@demo_pricing.cache.price'
+            - '@oro_entity.doctrine_helper'
+
+    demo_pricing.storage.prices_external:
+        class: Demo\Bundle\PricingBundle\Storage\CSVFilePriceStorage
+        arguments:
+            - '@oro_entity.doctrine_helper'
+
+    demo_pricing.storage.prices_cache_aware:
+        class: Demo\Bundle\PricingBundle\Storage\CacheAwarePriceStorage
+        public: false
+        decorates: oro_pricing.storage.prices
+        arguments:
+            - '@demo_pricing.storage.prices_external'
+            - '@demo_pricing.storage.prices_local'
+            - '@demo_pricing.cache.price'
+
+    # Price Providers
+    demo_pricing.provider.product_price_local:
+        parent: oro_pricing.provider.product_price
+        arguments:
+            index_0: '@demo_pricing.storage.prices_local'
+
+    demo_pricing.provider.product_price_external:
+        parent: oro_pricing.provider.product_price
+        arguments:
+            index_0: '@demo_pricing.storage.prices_external'
+
+    # Layout
+    demo_pricing.layout.data_provider.frontend_product_prices:
+        parent: oro_pricing.layout.data_provider.frontend_product_prices
+        arguments:
+            index_4: '@demo_pricing.provider.product_price_local'
+        tags:
+            - { name: layout.data_provider, alias: frontend_product_prices_cached }
+
+    # Frontend datagrid prices provider
+    demo_pricing.datagrid.provider.product_price:
+        parent: oro_pricing.datagrid.provider.product_price
+        decorates: oro_pricing.datagrid.provider.product_price
+        arguments:
+            index_0: '@demo_pricing.provider.product_price_local'
+
+    # Website Search
+    demo_pricing.event_listener.website_search_index:
+        class: 'Demo\Bundle\PricingBundle\EventListener\WebsiteSearchProductPriceIndexerListener'
+        arguments:
+            - '@oro_website_search.manager.website_context_manager'
+            - '@oro_pricing.provider.product_price'
+        tags:
+            - { name: kernel.event_listener, event: oro_website_search.event.index_entity.product, method: onWebsiteSearchIndex }
+
+    demo_pricing.event_listener.frontend.product_price_datagrid:
+        parent: oro_pricing.event_listener.frontend.product_price_datagrid
+        decorates: oro_pricing.event_listener.frontend.product_price_datagrid
+        calls:
+            - ['setPriceColumnNameForFilter', ['minimal_price_WEBSITE_ID_CURRENCY_UNIT']]
+            - ['setPriceColumnNameForSorter', ['minimal_price_WEBSITE_ID_CURRENCY']]
+        tags:
+            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.before.frontend-product-search-grid, method: onBuildBefore }
+            - { name: kernel.event_listener, event: oro_datagrid.search_datasource.result.after.frontend-product-search-grid, method: onResultAfter }

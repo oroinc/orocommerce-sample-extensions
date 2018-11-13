@@ -1,0 +1,7 @@
+sku,price,currency,quantity,unit
+0RT28,100,USD,1,item
+0RT28,99,USD,10,item
+TAG1,50,USD,1,item
+TAG1,100,USD,2,item
+furniture-simple-1,100,USD,1,item
+furniture-simple-2,100,USD,1,item

@@ -1,0 +1,5 @@
+features:
+    oro_pricing:
+        configuration:
+            - 'oro_pricing.feature_enabled'
+            - 'pricing_general'

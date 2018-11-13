@@ -1,0 +1,6 @@
+demo_product_price_frontend_ajax:
+    resource:     "@DemoPricingBundle/Controller/Frontend/AjaxProductPriceController.php"
+    type:         annotation
+    prefix:       /demo-productprice
+    options:
+        frontend: true

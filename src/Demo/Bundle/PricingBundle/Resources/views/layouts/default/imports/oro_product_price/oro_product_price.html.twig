@@ -1,0 +1,19 @@
+{% use 'OroPricingBundle:layouts/blank/imports:prices.html.twig' %}
+
+{% block __oro_product_price__product_prices_widget %}
+    {% if productPrices is not empty %}
+        {{ block('product_prices') }}
+    {% else %}
+        {% set attr = layout_attr_defaults(attr, {
+            '~class': ' product-price__prices',
+            'data-name': 'prices'
+        }) %}
+        <div {{ block('block_attributes') }}>
+            <div id="loading-frame" class="loading-frame">
+                <div class="box well">
+                    <img src="{{ asset('bundles/oroui/img/loader.gif') }}" alt="">
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

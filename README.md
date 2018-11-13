@@ -12,4 +12,7 @@ Examples:
 * [DemoBostonBundle](src/Demo/Bundle/BostonBundle):
     - direct shopping list to order converter (skips the storefront checkout flow entirely)
     - displaying some custom product attrubutes in the storefront product listing
+* [DemoPricingBundle](src/Demo/Bundle/PricingBundle):
+    - displaying how to integrate external service as a source of prices
+    - displaying how to implement lazy loading of prices and price hints for product list, product grid
 

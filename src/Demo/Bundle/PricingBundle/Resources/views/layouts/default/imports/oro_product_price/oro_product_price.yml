@@ -1,0 +1,8 @@
+layout:
+    actions:
+        - '@setBlockTheme':
+            themes: 'DemoPricingBundle:layouts:default/imports/oro_product_price/oro_product_price.html.twig'
+        - '@setOption':
+            id: __product_price_component
+            optionName: vars.forceComponentRender
+            optionValue: true

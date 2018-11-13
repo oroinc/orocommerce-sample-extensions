@@ -1,0 +1,13 @@
+config:
+    paths:
+        'demopricing/js/app/views/list-item-product-prices-view': 'bundles/demopricing/js/app/views/list-item-product-prices-view.js'
+        'demopricing/js/app/deferred-price-loader': 'bundles/demopricing/js/app/deferred-price-loader.js'
+
+    map:
+        # Override JS files.
+        '*':
+            'oropricing/js/app/views/list-item-product-prices-view': 'demopricing/js/app/views/list-item-product-prices-view'
+
+        # Allow access to original JS files.
+        'demopricing/js/app/views/list-item-product-prices-view':
+            'oropricing/js/app/views/list-item-product-prices-view': 'oropricing/js/app/views/list-item-product-prices-view'
