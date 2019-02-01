@@ -1,0 +1,18 @@
+services:
+    demo_shipping_table_rates.importexport.data_converter:
+        parent: oro_importexport.data_converter.configurable
+        public: false
+
+    demo_shipping_table_rates.importexport.strategy:
+        parent: oro_importexport.strategy.configurable_add_or_replace
+        public: false
+
+    demo_shipping_table_rates.importexport.processor.import:
+        parent: oro_importexport.processor.import_abstract
+        public: false
+        calls:
+            - [setDataConverter,  ['@demo_shipping_table_rates.importexport.data_converter']]
+            - [setStrategy, ['@demo_shipping_table_rates.importexport.strategy']]
+        tags:
+            - { name: oro_importexport.processor, type: import, entity: '%demo_shipping_table_rates.entity.shipping_table_rate.class%', alias: demo_shipping_table_rates.add_or_replace }
+            - { name: oro_importexport.processor, type: import_validation, entity: '%demo_shipping_table_rates.entity.shipping_table_rate.class%', alias: demo_shipping_table_rates.add_or_replace }

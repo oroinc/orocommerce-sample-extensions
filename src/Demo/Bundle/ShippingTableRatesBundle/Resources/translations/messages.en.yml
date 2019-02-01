@@ -1,0 +1,25 @@
+demo:
+    shippingtablerates:
+        shippingtablerate:
+            entity_label: Shipping Table Rate
+            entity_plural_label: Shipping Table Rates
+            id.label: ID
+            price.label: Price
+            handling_fee.label: Handling Fee
+            currency.label: Currency
+            country.label: Country
+            region.label: Region
+            postal_code.label: Postal Code
+        channel_type:
+            label: Shipping Table Rates
+        transport:
+            label: Shipping Table Rates
+            labels.label: Label
+        form:
+            demo_shipping_table_rates_options_type:
+                label: Shipping Table Rates
+        method:
+            processing_type:
+                label: Type
+                per_item.label: Per Item
+                per_order.label: Per Order
