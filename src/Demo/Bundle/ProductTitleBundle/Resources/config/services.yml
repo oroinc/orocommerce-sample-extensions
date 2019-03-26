@@ -1,0 +1,8 @@
+services:
+    demo_product_title.layout.data_provider.webcatalog_title:
+        class: Demo\Bundle\ProductTitleBundle\Layout\DataProvider\ProductTitleDataProvider
+        decorates: oro_web_catalog.layout.data_provider.title_data
+        public: false
+        arguments:
+            - '@oro_seo.layout.data_provider.webcatalog_title.inner'
+            - '@oro_locale.helper.localization'

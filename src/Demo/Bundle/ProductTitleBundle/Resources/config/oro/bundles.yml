@@ -1,0 +1,2 @@
+bundles:
+  - { name: Demo\Bundle\ProductTitleBundle\DemoProductTitleBundle, priority: 9999 }
