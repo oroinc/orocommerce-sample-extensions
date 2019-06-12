@@ -1,0 +1,5 @@
+operations:
+    oro_shoppinglist_delete:
+        preconditions:
+            # we will hide the button unless the shopping list label is "OK"
+            '@equal': ['OK', $.data.label]
