@@ -15,4 +15,6 @@ Examples:
 * [DemoPricingBundle](src/Demo/Bundle/PricingBundle):
     - displaying how to integrate external service as a source of prices
     - displaying how to implement lazy loading of prices and price hints for product list, product grid
-
+* [DemoShoppingListButtonsBundle](src/Demo/Bundle/ShoppingListButtonsBundle):
+    - conditionally hide "Delete" operation button from the storefront shopping list view page
+    - conditionally hide "Create Order" checkout workflow start button

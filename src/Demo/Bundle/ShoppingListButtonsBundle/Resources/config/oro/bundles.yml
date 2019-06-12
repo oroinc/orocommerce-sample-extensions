@@ -1,0 +1,2 @@
+bundles:
+    - { name: Demo\Bundle\ShoppingListButtonsBundle\DemoShoppingListButtonsBundle, priority: 61 }
