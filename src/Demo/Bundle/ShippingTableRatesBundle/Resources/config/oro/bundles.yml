@@ -1,2 +1,2 @@
 bundles:
-    - { name: Oro\Bundle\ShippingTableRatesBundle\OroShippingTableRatesBundle, priority: 1000 }
+    - { name: Demo\Bundle\ShippingTableRatesBundle\DemoShippingTableRatesBundle, priority: 1000 }
