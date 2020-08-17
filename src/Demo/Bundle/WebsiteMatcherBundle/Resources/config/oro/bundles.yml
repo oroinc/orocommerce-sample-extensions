@@ -1,0 +1,2 @@
+bundles:
+    - { name: \Demo\Bundle\WebsiteMatcherBundle\DemoWebsiteMatcherBundle }

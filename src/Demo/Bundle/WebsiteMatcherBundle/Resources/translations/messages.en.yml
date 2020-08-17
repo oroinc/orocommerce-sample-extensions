@@ -1,0 +1,6 @@
+demo_website_matcher:
+    url_and_cookie_matcher.label: 'URL and Cookie Matcher'
+    url_and_cookie_matcher.tooltip: >
+        This custom website matcher determines the website based on the website id stored in a browser cookie.
+        The current URL affects which browser cookie will be checked. For all ".com" domains we look into
+        "last_visited_website" cookie, and for all ".eu" domains we look into "user_selected_website".

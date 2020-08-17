@@ -1,0 +1,5 @@
+services:
+    Demo\Bundle\WebsiteMatcherBundle\WebsiteMatcher\UrlAndCookieWebsiteMatcher:
+        parent: oro_multiwebsite.matcher.abstract_website_matcher
+        tags:
+            - { name: oro_website_matcher, alias: 'url_and_cookie', priority: 500 }
