@@ -2,8 +2,8 @@
 
 This example demonstrates how to add a custom CSS class to the `<body>` tag of a specific back-office page (the Order view page). It showcases three key customization techniques:
 
-- Creating a JavaScript [page component](https://doc.oroinc.com/5.1/frontend/javascript/page-component/)
-- [Overriding Twig templates](https://doc.oroinc.com/5.1/frontend/back-office/templates/)
+- Creating a JavaScript [page component](https://doc.oroinc.com/frontend/javascript/page-component/)
+- [Overriding Twig templates](https://doc.oroinc.com/frontend/back-office/templates/)
 - Registering custom CSS styles
 
 ## Why A Page Component?
@@ -23,53 +23,55 @@ The core functionality is implemented as a page component that extends `BaseComp
 **File:** `assets/js/custom-body-class-component.js`
 
 ```javascript
-define(function(require) {
-    'use strict';
+import BaseComponent from 'oroui/js/app/components/base/component';
 
-    const BaseComponent = require('oroui/js/app/components/base/component');
+const CustomBodyClassComponent = BaseComponent.extend({
+    classes: null,
 
-    const CustomBodyClassComponent = BaseComponent.extend({
-        initialize: function(options) {
-            // Accept single or multiple classes separated by spaces
-            this.classes = options.bodyClass
-                ? String(options.bodyClass).split(' ')
-                : [];
+    constructor: function CustomBodyClassComponent(options) {
+        CustomBodyClassComponent.__super__.constructor.call(this, options);
+    },
 
-            this.classes.forEach(function(cls) {
-                if (cls) {
-                    document.body.classList.add(cls);
-                }
-            });
+    initialize(options) {
+        this.classes = options.bodyClass
+            ? String(options.bodyClass).split(' ')
+            : [];
 
-            CustomBodyClassComponent.__super__.initialize.call(this, options);
-        },
-
-        dispose: function() {
-            if (this.disposed) {
-                return;
+        this.classes.forEach(cls => {
+            if (cls) {
+                document.body.classList.add(cls);
             }
+        });
 
-            // Clean up: remove classes when navigating away
-            this.classes.forEach(function(cls) {
-                if (cls) {
-                    document.body.classList.remove(cls);
-                }
-            });
+        CustomBodyClassComponent.__super__.initialize.call(this, options);
+    },
 
-            CustomBodyClassComponent.__super__.dispose.call(this);
+    dispose() {
+        if (this.disposed) {
+            return;
         }
-    });
 
-    return CustomBodyClassComponent;
+        this.classes.forEach(cls => {
+            if (cls) {
+                document.body.classList.remove(cls);
+            }
+        });
+
+        CustomBodyClassComponent.__super__.dispose.call(this);
+    }
 });
+
+export default CustomBodyClassComponent;
 ```
 
 **Key points:**
+- Uses ESM syntax (`import`/`export default`) for module loading
 - Extends `BaseComponent` from `oroui/js/app/components/base/component`
+- Declares a named `constructor` function, which is required for proper inheritance in Oro's Backbone-based component system
 - The `initialize` method receives options passed from the template and adds the CSS class(es) to the body
 - The `dispose` method removes the classes when the component is destroyed (e.g., when navigating to another page), ensuring proper cleanup
 
-📚 [Page Component Documentation](https://doc.oroinc.com/5.1/frontend/javascript/page-component/)
+📚 [Page Component Documentation](https://doc.oroinc.com/frontend/javascript/page-component/)
 
 ### 2. Registering the JavaScript Module
 
@@ -85,7 +87,7 @@ dynamic-imports:
 
 This registers the component under the `commons` group, making it available for dynamic loading across the application.
 
-📚 [JS Modules Configuration](https://doc.oroinc.com/5.1/backend/configuration/yaml/jsmodules/)
+📚 [JS Modules Configuration](https://doc.oroinc.com/backend/configuration/yaml/jsmodules/)
 
 ### 3. Overriding the Template
 
@@ -115,7 +117,7 @@ To attach the page component to a specific page, override the original template:
 - Setting the `pageComponent` variable automatically initializes the component when the block is rendered
 - The `options` object is passed to the component's `initialize` method
 
-📚 [Templates (Twig) Documentation](https://doc.oroinc.com/5.1/frontend/back-office/templates/)
+📚 [Templates (Twig) Documentation](https://doc.oroinc.com/frontend/back-office/templates/)
 
 ### 4. Adding Custom Styles
 
@@ -125,11 +127,9 @@ Define CSS styles that target the custom body class:
 
 ```scss
 body.custom-order-view-page {
-    filter: hue-rotate(163deg) brightness(0.98);
+    filter: hue-rotate(170deg) brightness(0.98);
     background-color: #99f6ff;
-    color: green;
     font-weight: 600;
-    letter-spacing: 0.6px;
 }
 ```
 
@@ -147,7 +147,7 @@ css:
 ## File Structure
 
 ```
-custom-body-class-5.1/
+custom-body-class-6.1/
 ├── assets/
 │   ├── css/
 │   │   └── scss/

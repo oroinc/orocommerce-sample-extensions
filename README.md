@@ -14,6 +14,10 @@ there is no guarantee that these examples will work for any particular version o
 * [custom-body-class](bundle-less/custom-body-class-5.1) (5.1):
     - adds a custom class to the body tag of a certain back-office page
     - shows how to use page components, override templates and define custom CSS
+* [custom-body-class](bundle-less/custom-body-class-6.1) (6.1):
+    - adds a custom class to the body tag of a certain back-office page
+    - shows how to use page components, override templates and define custom CSS
+    - JavaScript is written using modern ESM syntax (ES6+), that will be required starting from OroCommerce 7.0
 
 ## Bundles:
 
