@@ -1,0 +1,14 @@
+{# Using ! is important to avoid infinite recursion as it tells Twig to use the original template, not the overridden one. #}
+{% extends '@!OroOrder/Order/view.html.twig' %}
+
+{% block content %}
+    {# Configure our page component for this page #}
+    {% set pageComponent = {
+        module: 'js/custom-body-class-component',
+        options: {
+            bodyClass: 'custom-order-view-page'
+        }
+    } %}
+
+    {{ parent() }}
+{% endblock %}
